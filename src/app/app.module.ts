@@ -14,6 +14,7 @@ import { JwtInterceptor } from './_helpers/jwt-interceptor';
 import { ErrorInterceptor } from './_helpers/error-interceptor';
 import { fakeBackendProvider } from './_helpers/fake-backend-interceptor';
 import { appRoutingModule } from './app-routing.module';
+import { AuthGuard } from './_helpers/auth.guard';
 
 @NgModule({
   imports:      [ BrowserModule,    ReactiveFormsModule,
@@ -29,7 +30,9 @@ declarations: [
 ],
 providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthGuard,
 
     // provider used to create fake backend
     fakeBackendProvider

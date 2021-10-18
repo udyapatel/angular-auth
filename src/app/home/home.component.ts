@@ -10,9 +10,9 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  loading = false;
-  currentUser: User;
-  userFromApi: User;
+  loading = true;
+  currentUser= new User() ;
+  userFromApi=  new User();
 
   constructor(
       private userService: UserService,
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.loading = true;
+     // this.loading = false;
       this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
           this.loading = false;
           this.userFromApi = user;
